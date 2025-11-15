@@ -1,13 +1,9 @@
+import PhoneItem from "@/app/_components/phone-item";
 import ServiceItem from "@/app/_components/service-item";
+import SidebarButton from "@/app/_components/sidebar-button";
 import { Button } from "@/app/_components/ui/button";
 import { db } from "@/app/_lib/prisma";
-import {
-  ChevronLeftIcon,
-  MapPinIcon,
-  MenuIcon,
-  SmartphoneIcon,
-  StarIcon,
-} from "lucide-react";
+import { ChevronLeftIcon, MapPinIcon, MenuIcon, StarIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -48,14 +44,9 @@ const BarberShopPage = async ({ params }) => {
           </Link>
         </Button>
 
-        <Button
-          asChild
-          size="icon"
-          variant="secondary"
-          className="absolute right-4 top-4"
-        >
-          <MenuIcon></MenuIcon>
-        </Button>
+        <div className="absolute right-4 top-4">
+          <SidebarButton></SidebarButton>
+        </div>
       </div>
 
       <div className="p-5 border-b border-solid">
@@ -74,7 +65,6 @@ const BarberShopPage = async ({ params }) => {
 
       <div className="p-5 space-y-3">
         <h2 className="font-semibold uppercase text-gray-400">Sobre nós</h2>
-
         <p className="text-justify text-sm">{barbeshop?.description}</p>
       </div>
 
@@ -90,17 +80,11 @@ const BarberShopPage = async ({ params }) => {
       <div className="p-5 space-y-3">
         <div className="space-y-3">
           {barbeshop.phones.map((phone) => (
-            <div  className="flex justify-between">
-              <div className="flex flex-items gap-3">
-              <SmartphoneIcon></SmartphoneIcon>
-              <p>{phone}</p>
-              </div>
-
-              <Button variant="outline" size="sm">Copiar</Button>
-            </div>
+            <PhoneItem phone={phone}></PhoneItem>
           ))}
         </div>
       </div>
+
     </div>
   );
 };
